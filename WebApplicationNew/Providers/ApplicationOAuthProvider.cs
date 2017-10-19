@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.OAuth;
+using WebApplicationNew.Models;
+using Microsoft.AspNet.Identity.Owin;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplicationNew.Providers
 {
@@ -16,6 +20,12 @@ namespace WebApplicationNew.Providers
             }
 
             _publicClientId = publicClientId;
+        }
+
+        public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+        {
+            context.Validated();
+            return Task.FromResult<object>(null);
         }
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
@@ -36,6 +46,33 @@ namespace WebApplicationNew.Providers
             }
 
             return Task.FromResult<object>(null);
+        }
+
+        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        {
+            ApplicationUserManager userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            ApplicationUser user;
+            try
+            {
+                user = await userManager.FindAsync(context.UserName, context.Password);
+            }
+            catch
+            {
+                // Could not retrieve the user due to error.
+                context.SetError("server_error_");
+                context.Rejected();
+                return;
+            }
+            if (user != null)
+            {
+                ClaimsIdentity identity = await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ExternalBearer);
+                context.Validated(identity);
+            }
+            else
+            {
+                context.SetError("invalid_grant_", "Invalid User Id or password'");
+                context.Rejected();
+            }
         }
     }
 }

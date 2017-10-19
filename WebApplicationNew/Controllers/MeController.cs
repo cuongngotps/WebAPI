@@ -17,6 +17,7 @@ namespace WebApplicationNew.Controllers
 {
     [RoutePrefix("api/me")]
     [LogActionFilter]
+    [Authorize]
     public class MeController : ApiController
     {
         private ApplicationUserManager _userManager;
@@ -58,7 +59,7 @@ namespace WebApplicationNew.Controllers
 
         [HttpGet]
         [Route("users/delete/{id}")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public void DeleteUser(String id)
         {
             UserManager.Delete(UserManager.FindById(id));
@@ -66,6 +67,7 @@ namespace WebApplicationNew.Controllers
 
         [HttpPost]
         [Route("users/add")]
+        [Authorize(Roles = "admin")]
         public String AddNewUser([FromBody]String userName)
         {
             return userName;

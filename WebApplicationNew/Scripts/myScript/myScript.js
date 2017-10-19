@@ -1,13 +1,13 @@
 ﻿(function () {
 	var app = angular.module('myApp', []);
 
-	app.controller('myCtrl', ['$http', '$scope', 'addNewUser', function ($http, $scope, addNewUser) {
+	app.controller('myCtrl', ['$http', '$scope', '$window', '$location', 'addNewUser', function ($http, $scope, $window, $location, addNewUser) {
 
 		$http.get('api/me/users/all')
 			.then(function (response) {
 				$scope.users = response.data;
 			}, function (response) {
-
+				$window.location.href = '/src/login.html';
 			});
 
 		$scope.deleteUser = function (id) {
@@ -22,6 +22,12 @@
 
 		$scope.addUser = function () {
 			addNewUser.add($scope);
+		}
+	}]);
+
+	app.controller('ctlLogin', ['$http', '$scope', function ($http, $scope) {
+		$scope.login = function () {
+
 		}
 	}]);
 
