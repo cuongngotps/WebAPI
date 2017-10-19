@@ -9,10 +9,10 @@
 	<form ng-controller="ctlLogin">
 		<ul>
 			<li>
-				User Name <input type="text"/>
+				Email <input type="email" ng-model="user.email" />
 			</li>
 			<li>
-				Password <input type="password" />
+				Password <input type="password" ng-model="user.password"/>
 			</li>
 			<li>
 				<input type="button" value="Login" ng-click="login()"/>

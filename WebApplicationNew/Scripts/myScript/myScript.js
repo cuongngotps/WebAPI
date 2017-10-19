@@ -25,9 +25,14 @@
 		}
 	}]);
 
-	app.controller('ctlLogin', ['$http', '$scope', function ($http, $scope) {
-		$scope.login = function () {
+    app.controller('ctlLogin', ['$http', '$scope', function ($http, $scope) {
+        $scope.login = function () {
+            $http.post('api/account/login', $scope.user)
+                .then(function (response) {
 
+                }), function (response) {
+
+                };
 		}
 	}]);
 
