@@ -14,21 +14,21 @@
 	});
 
 	app.controller('myCtrl', ['$http', '$scope', '$window', '$location', 'addNewUser', function ($http, $scope, $window, $location, addNewUser) {
-
-		if (typeof (app.token) == 'undefined') {
+		
+		if (typeof (window.token) == 'undefined') {
 			$location.path('login');
+			app.vm = this;
 		} else {
 			$http({
 				method: 'GET',
 				url: 'api/me/users/all',
 				headers: {
-					"Authorization": "bearer " + app.token
+					"Authorization": "bearer " + window.token
 				}
 			}).then(function (response) {
-				$scope.userdata = {};
-				$scope.userdata.users = response.data;
-
-				console.log($scope.userdata.users);
+				app.vm.userdata = {};
+				app.vm.userdata.users = response.data;
+				console.log(app.vm.userdata.users);
 
 			}, function (response) {
 				$location.path('login');
@@ -37,14 +37,19 @@
 
 		
 
-		$scope.deleteUser = function (id) {
+		app.vm.deleteUser = function (id) {
 
-			$http.get('api/me/users/delete/' + id)
-				.then(function (response) {
-
-				}, function (response) {
-
-				});
+			$http({
+				method: 'GET',
+				url: 'api/me/users/delete/' + id,
+				headers: {
+					"Authorization": "bearer " + window.token
+				}
+			}).then(function (response) {
+				$window.alert(response.data);
+			}, function (response) {
+				window.alert(response.data.message);
+			});
 		};
 
 		$scope.addUser = function () {
@@ -64,7 +69,7 @@
 					"Content-Type": "application/x-www-form-urlencoded"
 				}
 			}).then(function (response) {
-				app.token = response.data.access_token;
+				window.token = response.data.access_token;
 				$location.path('/');
             }), function (response) {
 
