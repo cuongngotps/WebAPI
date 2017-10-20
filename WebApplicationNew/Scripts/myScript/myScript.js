@@ -1,14 +1,41 @@
 ﻿(function () {
-	var app = angular.module('myApp', []);
+	var app = angular.module('myApp', ['ngRoute']);
+
+	app.config(function ($routeProvider) {
+		$routeProvider
+			.when('/login', {
+				templateUrl: "/src/login.html",
+				controller: 'ctlLogin'
+				//redirectTo: '/src/login.html'
+			}).when('/', {
+				templateUrl: "/",
+				controller: 'myCtrl'
+			})
+	});
 
 	app.controller('myCtrl', ['$http', '$scope', '$window', '$location', 'addNewUser', function ($http, $scope, $window, $location, addNewUser) {
 
-		$http.get('api/me/users/all')
-			.then(function (response) {
-				$scope.users = response.data;
+		if (typeof (app.token) == 'undefined') {
+			$location.path('login');
+		} else {
+			$http({
+				method: 'GET',
+				url: 'api/me/users/all',
+				headers: {
+					"Authorization": "bearer " + app.token
+				}
+			}).then(function (response) {
+				$scope.userdata = {};
+				$scope.userdata.users = response.data;
+
+				console.log($scope.userdata.users);
+
 			}, function (response) {
-				$window.location.href = '/src/login.html';
+				$location.path('login');
 			});
+		}
+
+		
 
 		$scope.deleteUser = function (id) {
 
@@ -23,16 +50,25 @@
 		$scope.addUser = function () {
 			addNewUser.add($scope);
 		}
+
 	}]);
 
-    app.controller('ctlLogin', ['$http', '$scope', function ($http, $scope) {
+	app.controller('ctlLogin', ['$http', '$scope', '$location', function ($http, $scope, $location) {
         $scope.login = function () {
-            $http.post('api/account/login', $scope.user)
-                .then(function (response) {
+			var data = "grant_type=password&username=" + $scope.username + "&password=" + $scope.password;
+			$http({
+				method: 'POST',
+				url: '/token',
+				data: data,
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				}
+			}).then(function (response) {
+				app.token = response.data.access_token;
+				$location.path('/');
+            }), function (response) {
 
-                }), function (response) {
-
-                };
+            };
 		}
 	}]);
 
