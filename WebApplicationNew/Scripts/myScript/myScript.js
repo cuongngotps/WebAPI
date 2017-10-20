@@ -6,7 +6,6 @@
 			.when('/login', {
 				templateUrl: "/src/login.html",
 				controller: 'ctlLogin'
-				//redirectTo: '/src/login.html'
 			}).when('/', {
 				templateUrl: "/",
 				controller: 'myCtrl'
@@ -52,8 +51,8 @@
 			});
 		};
 
-		$scope.addUser = function () {
-			addNewUser.add($scope);
+		app.vm.addUser = function () {
+			addNewUser.add(app.vm);
 		}
 
 	}]);
@@ -84,13 +83,15 @@
 		}
 
 		function add($scope) {
-			$http.post('api/me/users/add', $scope.email)
-				.then(function (response) {
-
-				}, function (response) {
-
-				});
-			$scope.email = "";
+			$http.post('api/me/users/add', $scope.username, {
+				headers: {
+					"Authorization": "bearer " + window.token
+				}
+			}).then(function (response) {
+				console.log(response);
+			}, function (response) {
+				console.log(response);
+			});
 		}
 	}]);
 

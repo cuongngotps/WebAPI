@@ -28,9 +28,9 @@
 			</ul>
 
 			<form name="userForm">
-				<input type="email" name="email" ng-model="email" value="" />  <input type="button" value="Add" ng-click="addUser()" />
+				<input type="text" name="username" ng-model="$ctrl.username" value="" />  <input type="button" value="Add" ng-click="$ctrl.addUser()" />
 			</form>
-			<span ng-show="userForm.email.$invalid">The email is invalid.</span>
+			@*<span ng-show="userForm.email.$invalid">The email is invalid.</span>*@
 		</div>
     </div>
 

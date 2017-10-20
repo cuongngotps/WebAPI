@@ -68,9 +68,9 @@ namespace WebApplicationNew.Controllers
         [HttpPost]
         [Route("users/add")]
         [Authorize(Roles = "admin")]
-        public String AddNewUser([FromBody]String userName)
+        public String AddNewUser([FromBody]string username)
         {
-            return userName;
+            return username;
         }
     }
 }
