@@ -14,6 +14,11 @@ namespace WebApplicationNew.Repositories
 
     public class UserRepository : RepositoryBase<ApplicationUser>, IUserRepository
     {
+        public UserRepository() : base()
+        {
+
+        }
+
         public UserRepository(IDbFactory dbFactory) : base(dbFactory)
         {
 

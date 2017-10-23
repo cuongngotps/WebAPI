@@ -17,6 +17,8 @@ using Autofac.Integration.Mvc;
 using System.Web.Mvc;
 using System.Web.Http;
 using Autofac.Integration.WebApi;
+using WebApplicationNew.Repositories;
+using WebApplicationNew.DB;
 
 namespace WebApplicationNew
 {
@@ -50,13 +52,25 @@ namespace WebApplicationNew
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
+
+            builder.RegisterType<IDbFactory>().As<IDbFactory>().InstancePerRequest();
+            builder.RegisterType<DemoDbContext>().AsSelf().InstancePerRequest();
+
+
             //Asp.net Identity
             //builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
+
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
+
+            // Repositories
+            //builder.RegisterAssemblyTypes(typeof(UserRepository).Assembly)
+            //     .Where(t => t.Name.EndsWith("Repository"))
+            //     .AsImplementedInterfaces().InstancePerRequest();
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

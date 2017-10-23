@@ -2,7 +2,7 @@
 	<ul>
 		<li>
 			<span for="userName">User Name</span>
-			<input type="text" name="userName" ng-model="$ctrl.userName" value="" />
+			<input type="text" name="userName" ng-model="$ctrl.userName" value="" verify-exist/>
 		</li>
 		<li>
 			<span for="email">Email</span>
@@ -19,3 +19,5 @@
 </form>
 
 <span ng-show="userForm.email.$invalid">The email is invalid.</span>
+
+<span ng-show='userForm.userName.$error.unique'>Username already exists.</span>

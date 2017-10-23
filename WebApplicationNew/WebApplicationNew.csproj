@@ -265,7 +265,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageUserController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="DB\DbFactory.cs" />
     <Compile Include="DB\DemoDbContext.cs" />
+    <Compile Include="DB\Disposable.cs" />
     <Compile Include="DB\IDbFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -18,6 +18,12 @@ namespace WebApplicationNew.Repositories
             get;
         }
 
+        protected RepositoryBase()
+        {
+            this.DbFactory = new DbFactory();
+            this.dbSet = this.DbContext.Set<T>();
+        }
+
         protected RepositoryBase(IDbFactory dbFactory)
         {
             this.DbFactory = dbFactory;
@@ -29,25 +35,25 @@ namespace WebApplicationNew.Repositories
             get { return DbFactory.Init(); }
         }
 
-        T IRepository<T>.Add(T entity)
+        public virtual T Add(T entity)
         {
             var res = dbSet.Add(entity);
             DbContext.SaveChanges();
             return res;
         }
 
-        long IRepository<T>.Count()
+        public virtual long Count()
         {
             throw new NotImplementedException();
         }
 
-        bool IRepository<T>.Delete(T entity)
+        public virtual bool Delete(T entity)
         {
             dbSet.Remove(entity);
             return DbContext.SaveChanges() > 0;
         }
 
-        bool IRepository<T>.Delete(int id)
+        public virtual bool Delete(int id)
         {
             var entity = dbSet.Find(id);
             if (entity != null)
@@ -61,12 +67,12 @@ namespace WebApplicationNew.Repositories
             }
         }
 
-        List<T> IRepository<T>.GetAll()
+        public virtual List<T> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        bool IRepository<T>.Update(T entity)
+        public virtual bool Update(T entity)
         {
             dbSet.AddOrUpdate(entity);
             return DbContext.SaveChanges() > 0;

@@ -27,12 +27,13 @@ namespace WebApplicationNew.Controllers
 
         public MeController()
         {
+            _userRepository = new UserRepository();
         }
 
-        public MeController(ApplicationUserManager userManager/*, IUserRepository userRepository*/)
+        public MeController(ApplicationUserManager userManager, IUserRepository userRepository)
         {
             UserManager = userManager;
-            //_userRepository = userRepository;
+            _userRepository = userRepository;
         }
 
         public ApplicationUserManager UserManager
@@ -74,8 +75,17 @@ namespace WebApplicationNew.Controllers
         [Authorize(Roles = "admin")]
         public String AddNewUser([FromBody]UserViewModel userViewModel)
         {
-            //_userRepository.Add(Mapper.Map<ApplicationUser>(userViewModel));
-            return userViewModel.UserName;
+            ApplicationUser applicationUser = Mapper.Map<ApplicationUser>(userViewModel);
+            _userRepository.Add(applicationUser);
+            return userViewModel.Email;
+        }
+
+        [HttpPost]
+        [Route("users/checkexist")]
+        [Authorize]
+        public bool CheckExistUser([FromBody]UserViewModel userViewModel)
+        {
+            return UserManager.FindByName(userViewModel.UserName) != null;
         }
     }
 }

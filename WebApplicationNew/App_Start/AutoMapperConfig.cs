@@ -12,7 +12,7 @@ namespace WebApplicationNew.App_Start
     {
         public static void RegisterConfig()
         {
-            Mapper.Initialize(config => config.CreateMap<ApplicationUser, UserViewModel>());
+            Mapper.Initialize(config => config. CreateMap<ApplicationUser, UserViewModel>().ReverseMap());
         }
     }
 }
