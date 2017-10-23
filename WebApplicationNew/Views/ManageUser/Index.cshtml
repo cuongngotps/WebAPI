@@ -21,15 +21,15 @@
 		<div ng-view=""></div>
 
 		<div ng-controller="myCtrl as $ctrl">
-			<p>List users</p>
 
-			<ul>
-				<item-user></item-user>
-			</ul>
+			<item-user ng-hide="$ctrl.hideUsers"></item-user>
 
-			<form name="userForm">
+			<dr-add-user></dr-add-user>
+
+			@*<form name="userForm">
 				<input type="text" name="username" ng-model="$ctrl.username" value="" />  <input type="button" value="Add" ng-click="$ctrl.addUser()" />
-			</form>
+			</form>*@
+
 			@*<span ng-show="userForm.email.$invalid">The email is invalid.</span>*@
 		</div>
     </div>

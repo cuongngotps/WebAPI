@@ -1,3 +1,8 @@
-﻿<li ng-repeat="user in $ctrl.userdata.users">
-	{{user.email}}   <span style="color: red" ng-click="$ctrl.deleteUser(user.id)">X</span>
-</li>
+﻿<p>List users</p>
+<ul>
+	<li ng-repeat="user in $ctrl.userdata.users">
+		{{user.email}}   <span style="color: red" ng-click="$ctrl.deleteUser(user.id)">X</span>
+	</li>
+</ul>
+<br />
+<a href="" ng-click="$ctrl.showAddUser()">Add new user</a>

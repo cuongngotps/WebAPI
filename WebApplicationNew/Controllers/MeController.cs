@@ -12,6 +12,7 @@ using Microsoft.Owin.Security;
 using Owin;
 using WebApplicationNew.Models;
 using AutoMapper;
+using WebApplicationNew.Repositories;
 
 namespace WebApplicationNew.Controllers
 {
@@ -22,13 +23,16 @@ namespace WebApplicationNew.Controllers
     {
         private ApplicationUserManager _userManager;
 
+        private IUserRepository _userRepository;
+
         public MeController()
         {
         }
 
-        public MeController(ApplicationUserManager userManager)
+        public MeController(ApplicationUserManager userManager/*, IUserRepository userRepository*/)
         {
             UserManager = userManager;
+            //_userRepository = userRepository;
         }
 
         public ApplicationUserManager UserManager
@@ -68,9 +72,10 @@ namespace WebApplicationNew.Controllers
         [HttpPost]
         [Route("users/add")]
         [Authorize(Roles = "admin")]
-        public String AddNewUser([FromBody]string username)
+        public String AddNewUser([FromBody]UserViewModel userViewModel)
         {
-            return username;
+            //_userRepository.Add(Mapper.Map<ApplicationUser>(userViewModel));
+            return userViewModel.UserName;
         }
     }
 }

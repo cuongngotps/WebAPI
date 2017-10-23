@@ -1,0 +1,21 @@
+﻿<form name="userForm" ng-hide="$ctrl.hideAddUser">
+	<ul>
+		<li>
+			<span for="userName">User Name</span>
+			<input type="text" name="userName" ng-model="$ctrl.userName" value="" />
+		</li>
+		<li>
+			<span for="email">Email</span>
+			<input type="email" name="email" ng-model="$ctrl.email" value="" />
+		</li>
+		<li>
+			<span for="phoneNumber">Phone Number</span>
+			<input type="text" name="phoneNumber" ng-model="$ctrl.phoneNumber" value="" />
+		</li>
+		<li>
+			<input type="button" value="Add" ng-click="$ctrl.addUser()" />
+		</li>		
+	</ul>
+</form>
+
+<span ng-show="userForm.email.$invalid">The email is invalid.</span>

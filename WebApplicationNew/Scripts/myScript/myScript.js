@@ -6,17 +6,21 @@
 			.when('/login', {
 				templateUrl: "/src/login.html",
 				controller: 'ctlLogin'
-			}).when('/', {
-				templateUrl: "/",
-				controller: 'myCtrl'
 			})
+			//.when('/', {
+			//	templateUrl: "/src/item-user.html",
+			//	controller: 'myCtrl'
+			//})
+			;
 	});
 
 	app.controller('myCtrl', ['$http', '$scope', '$window', '$location', 'addNewUser', function ($http, $scope, $window, $location, addNewUser) {
 		
 		if (typeof (window.token) == 'undefined') {
-			$location.path('login');
 			app.vm = this;
+			app.vm.hideAddUser = true;
+			app.vm.hideUsers = true;
+			$location.path('login');
 		} else {
 			$http({
 				method: 'GET',
@@ -27,7 +31,8 @@
 			}).then(function (response) {
 				app.vm.userdata = {};
 				app.vm.userdata.users = response.data;
-				console.log(app.vm.userdata.users);
+
+				app.vm.hideUsers = false;
 
 			}, function (response) {
 				$location.path('login');
@@ -55,6 +60,10 @@
 			addNewUser.add(app.vm);
 		}
 
+		app.vm.showAddUser = function () {
+			app.vm.hideAddUser = false;
+		}
+
 	}]);
 
 	app.controller('ctlLogin', ['$http', '$scope', '$location', function ($http, $scope, $location) {
@@ -69,7 +78,8 @@
 				}
 			}).then(function (response) {
 				window.token = response.data.access_token;
-				$location.path('/');
+				//$location.path('/');
+				app.vm.hideUsers = true;
             }), function (response) {
 
             };
@@ -83,21 +93,37 @@
 		}
 
 		function add($scope) {
-			$http.post('api/me/users/add', $scope.username, {
+			$http({
+				method: 'POST',
+				url: 'api/me/users/add',
 				headers: {
 					"Authorization": "bearer " + window.token
+				},
+				data: {
+					userName: $scope.userName,
+					email: $scope.email,
+					phoneNumber: $scope.phoneNumber
 				}
+			}, $scope.username, {
+				
 			}).then(function (response) {
 				console.log(response);
 			}, function (response) {
 				console.log(response);
 			});
+			app.vm.hideAddUser = true;
 		}
 	}]);
 
 	app.directive('itemUser', function () {
 		return {
 			templateUrl: '/src/item-user.html'
+		}
+	});
+
+	app.directive('drAddUser', function () {
+		return {
+			templateUrl: '/src/add-user.html'
 		}
 	});
 
