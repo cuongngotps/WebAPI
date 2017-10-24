@@ -75,6 +75,9 @@ namespace WebApplicationNew
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
+            //DependencyResolver.SetResolver(new Unity.Mvc4.UnityDependencyResolver(container));
+            //GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
+
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
         }

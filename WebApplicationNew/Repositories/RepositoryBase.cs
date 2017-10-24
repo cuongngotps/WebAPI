@@ -18,6 +18,11 @@ namespace WebApplicationNew.Repositories
             get;
         }
 
+        protected DemoDbContext DbContext
+        {
+            get { return DbFactory.Init(); }
+        }
+
         protected RepositoryBase()
         {
             this.DbFactory = new DbFactory();
@@ -28,11 +33,6 @@ namespace WebApplicationNew.Repositories
         {
             this.DbFactory = dbFactory;
             this.dbSet = this.DbContext.Set<T>();
-        }
-
-        protected DemoDbContext DbContext
-        {
-            get { return DbFactory.Init(); }
         }
 
         public virtual T Add(T entity)

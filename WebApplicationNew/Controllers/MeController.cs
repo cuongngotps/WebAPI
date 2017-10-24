@@ -25,10 +25,10 @@ namespace WebApplicationNew.Controllers
 
         private IUserRepository _userRepository;
 
-        public MeController()
-        {
-            _userRepository = new UserRepository();
-        }
+        //public MeController()
+        //{
+        //    _userRepository = new UserRepository();
+        //}
 
         public MeController(ApplicationUserManager userManager, IUserRepository userRepository)
         {

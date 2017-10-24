@@ -22,5 +22,10 @@ namespace WebApplicationNew.DB
         {
             return new DemoDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
