@@ -285,3 +285,16 @@ e:\Web API\WebAPI\WebApplicationNew\bin\Microsoft.Practices.ServiceLocation.xml
 e:\Web API\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.xml
 e:\Web API\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.Configuration.xml
 e:\Web API\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.ServiceLocation.dll
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.Configuration.dll
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.dll
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Unity.Mvc4.dll
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Unity.WebApi.dll
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.ServiceLocation.pdb
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.ServiceLocation.xml
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.xml
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.Configuration.xml
+d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
+d:\ASP API\Sample\WebAPI\WebApplicationNew\obj\Debug\WebApplicationNew.Migrations.Migration1.resources
+d:\ASP API\Sample\WebAPI\WebApplicationNew\obj\Debug\WebApplicationNew.csproj.GenerateResource.Cache

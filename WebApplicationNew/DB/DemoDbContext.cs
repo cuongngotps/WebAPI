@@ -13,9 +13,10 @@ namespace WebApplicationNew.DB
     {
         public DbSet<Hometown> Hometowns { get; set; }
 
-        public DemoDbContext() : base("DatabaseConnection")
+        public DemoDbContext() : base("DefaultConnection")
         {
             this.Configuration.LazyLoadingEnabled = false;
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DemoDbContext, WebApplicationNew.Migrations.Configuration>("DefaultConnection"));
         }
 
         public static DemoDbContext Create()

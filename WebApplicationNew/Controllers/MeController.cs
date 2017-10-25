@@ -23,18 +23,18 @@ namespace WebApplicationNew.Controllers
     {
         private ApplicationUserManager _userManager;
 
-        private IUserRepository _userRepository;
+        private IUserRepository _userRepository = new UserRepository();
 
-        //public MeController()
-        //{
-        //    _userRepository = new UserRepository();
-        //}
-
-        public MeController(ApplicationUserManager userManager, IUserRepository userRepository)
+        public MeController()
         {
-            UserManager = userManager;
-            _userRepository = userRepository;
+            //_userRepository = new UserRepository();
         }
+
+        //public MeController(ApplicationUserManager userManager, IUserRepository userRepository)
+        //{
+        //    UserManager = userManager;
+        //    _userRepository = userRepository;
+        //}
 
         public ApplicationUserManager UserManager
         {
@@ -73,7 +73,7 @@ namespace WebApplicationNew.Controllers
         [HttpPost]
         [Route("users/add")]
         [Authorize(Roles = "admin")]
-        public String AddNewUser([FromBody]UserViewModel userViewModel)
+        public UserViewModel AddNewUser([FromBody]UserViewModel userViewModel)
         {
             ApplicationUser applicationUser = Mapper.Map<ApplicationUser>(userViewModel);
             applicationUser.Id = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
@@ -82,10 +82,10 @@ namespace WebApplicationNew.Controllers
             applicationUser.PhoneNumberConfirmed = false;
             applicationUser.TwoFactorEnabled = false;
 
-            IdentityResult identityResult = UserManager.Create(applicationUser);
+            //IdentityResult identityResult = UserManager.Create(applicationUser);
 
-            //_userRepository.Add(applicationUser);
-            return userViewModel.Email;
+            var user = _userRepository.Add(applicationUser);
+            return Mapper.Map<UserViewModel>(user);
         }
 
         [HttpPost]

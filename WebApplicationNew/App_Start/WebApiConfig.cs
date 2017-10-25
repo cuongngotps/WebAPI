@@ -29,7 +29,7 @@ namespace WebApplicationNew
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.EnableCors();
+            //config.EnableCors();
         }
     }
 }

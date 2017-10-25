@@ -127,11 +127,11 @@
                 }
             }, $scope.username, {
 
-                }).then(function (response) {
-                    console.log(response);
-                }, function (response) {
-                    console.log(response);
-                });
+            }).then(function (response) {
+                console.log(response);
+            }, function (response) {
+                console.log(response);
+            });
             app.vm.hideAddUser = true;
         }
 
@@ -168,10 +168,9 @@
 					email: $scope.email,
 					phoneNumber: $scope.phoneNumber
 				}
-			}, $scope.username, {
-				
 			}).then(function (response) {
 				console.log(response);
+				$scope.userdata.users.push(response.data);
 			}, function (response) {
 				console.log(response);
 			});
