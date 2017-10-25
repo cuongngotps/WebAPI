@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace WebApplicationNew.Models
 {
@@ -10,6 +11,12 @@ namespace WebApplicationNew.Models
     public class ApplicationUser : IdentityUser
     {
         public string Hometown { get; set; }
+
+        public ApplicationUser()
+        : base()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

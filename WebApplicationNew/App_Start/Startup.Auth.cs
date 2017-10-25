@@ -19,6 +19,7 @@ using System.Web.Http;
 using Autofac.Integration.WebApi;
 using WebApplicationNew.Repositories;
 using WebApplicationNew.DB;
+using Microsoft.Practices.Unity;
 
 namespace WebApplicationNew
 {
@@ -65,21 +66,15 @@ namespace WebApplicationNew
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
-            builder.RegisterType<UserRepository>().As<IUserRepository>();
-
             // Repositories
-            //builder.RegisterAssemblyTypes(typeof(UserRepository).Assembly)
-            //     .Where(t => t.Name.EndsWith("Repository"))
-            //     .AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(UserRepository).Assembly)
+                 .Where(t => t.Name.EndsWith("Repository"))
+                 .AsImplementedInterfaces().InstancePerRequest();
 
             IContainer container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            //DependencyResolver.SetResolver(new Unity.Mvc4.UnityDependencyResolver(container));
-            //GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
+            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-
         }
 
         public void ConfigureAuth(IAppBuilder app)

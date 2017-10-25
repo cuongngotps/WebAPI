@@ -12,7 +12,7 @@ namespace WebApplicationNew
     {
         public void Configuration(IAppBuilder app)
         {
-            //ConfigAutofac(app);
+            ConfigAutofac(app);
             ConfigureAuth(app);
         }
     }

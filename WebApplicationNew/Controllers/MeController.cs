@@ -76,7 +76,15 @@ namespace WebApplicationNew.Controllers
         public String AddNewUser([FromBody]UserViewModel userViewModel)
         {
             ApplicationUser applicationUser = Mapper.Map<ApplicationUser>(userViewModel);
-            _userRepository.Add(applicationUser);
+            applicationUser.Id = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
+            applicationUser.EmailConfirmed = false;
+            applicationUser.LockoutEnabled = false;
+            applicationUser.PhoneNumberConfirmed = false;
+            applicationUser.TwoFactorEnabled = false;
+
+            IdentityResult identityResult = UserManager.Create(applicationUser);
+
+            //_userRepository.Add(applicationUser);
             return userViewModel.Email;
         }
 
