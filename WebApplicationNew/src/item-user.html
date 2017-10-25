@@ -1,7 +1,7 @@
 ﻿<p>List users</p>
 <ul>
 	<li ng-repeat="user in $ctrl.userdata.users">
-		{{user.email}}   <span style="color: red" ng-click="$ctrl.deleteUser(user.id)">X</span>
+		{{user.email}}   <span style="color: red" ng-click="$ctrl.deleteUser($index, user.id)">X</span>
 	</li>
 </ul>
 <br />

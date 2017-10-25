@@ -298,3 +298,4 @@ d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.Configu
 d:\ASP API\Sample\WebAPI\WebApplicationNew\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
 d:\ASP API\Sample\WebAPI\WebApplicationNew\obj\Debug\WebApplicationNew.Migrations.Migration1.resources
 d:\ASP API\Sample\WebAPI\WebApplicationNew\obj\Debug\WebApplicationNew.csproj.GenerateResource.Cache
+d:\ASP API\Sample\WebAPI\WebApplicationNew\obj\Debug\WebApplicationNew.Migrations.Migration2.resources

@@ -294,9 +294,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710250459116_Migration1.cs" />
-    <Compile Include="Migrations\201710250459116_Migration1.Designer.cs">
-      <DependentUpon>201710250459116_Migration1.cs</DependentUpon>
+    <Compile Include="Migrations\201710250812041_Migration1.cs" />
+    <Compile Include="Migrations\201710250812041_Migration1.Designer.cs">
+      <DependentUpon>201710250812041_Migration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710250836490_Migration2.cs" />
+    <Compile Include="Migrations\201710250836490_Migration2.Designer.cs">
+      <DependentUpon>201710250836490_Migration2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -306,14 +310,12 @@
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Repositories\HometownRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Table\Hometown.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -431,10 +433,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Table\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710250459116_Migration1.resx">
-      <DependentUpon>201710250459116_Migration1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710250812041_Migration1.resx">
+      <DependentUpon>201710250812041_Migration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710250836490_Migration2.resx">
+      <DependentUpon>201710250836490_Migration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -64,7 +64,7 @@ namespace WebApplicationNew.Controllers
 
         [HttpGet]
         [Route("users/delete/{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public void DeleteUser(String id)
         {
             UserManager.Delete(UserManager.FindById(id));
@@ -72,7 +72,7 @@ namespace WebApplicationNew.Controllers
 
         [HttpPost]
         [Route("users/add")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public UserViewModel AddNewUser([FromBody]UserViewModel userViewModel)
         {
             ApplicationUser applicationUser = Mapper.Map<ApplicationUser>(userViewModel);

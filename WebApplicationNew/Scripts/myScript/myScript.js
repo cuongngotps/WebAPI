@@ -43,7 +43,7 @@
 
 		
 
-		app.vm.deleteUser = function (id) {
+		app.vm.deleteUser = function (index, id) {
 
 			$http({
 				method: 'GET',
@@ -52,7 +52,7 @@
 					"Authorization": "bearer " + window.token
 				}
 			}).then(function (response) {
-				$window.alert(response.data);
+				app.vm.userdata.users.splice(index, 1);
 			}, function (response) {
 				window.alert(response.data.message);
 			});
@@ -175,6 +175,9 @@
 				console.log(response);
 			});
 			app.vm.hideAddUser = true;
+			$scope.userName = "";
+			$scope.email = "";
+			$scope.phoneNumber = "";
 		}
 	}]);
 

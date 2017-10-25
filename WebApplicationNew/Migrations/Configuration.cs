@@ -12,7 +12,7 @@ namespace WebApplicationNew.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(WebApplicationNew.DB.DemoDbContext context)
@@ -39,6 +39,7 @@ namespace WebApplicationNew.Migrations
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
+            context.Database.CreateIfNotExists();
 
             if (!roleManager.Roles.Any())
             {
